@@ -1,0 +1,69 @@
+#:kivy 2.0.0
+
+#Todas las pantallas
+windowManager:
+	loginWindow:
+	home:
+
+#todos los elementos de la GUI de login
+<loginWindow>:
+	user : user
+	password : password
+	FloatLayout:
+		size: root.width, root.height
+		Label:
+			text : "Name: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x":0.25, "top":0.9}
+		TextInput:
+			id : user
+			multiline :False
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.45, "top" : 0.9}
+		Label:
+			text : "Password: "
+			size_hint : 0.2, 0.1
+			pos_hint : {"x" : 0.25, "top" : 0.7}
+		TextInput:
+			id : password
+			multiline :False
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.45, "top" : 0.7}
+		
+		Button:
+			text : "LOGIN"
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.39, "top" : 0.2}
+			on_release:
+				root.validate()
+				#Transición para que al cambiar de pantalla vaya para arriba
+				root.manager.transition.direction = "up"
+
+
+#todos los elementos de la GUI de Home por asi llamarlo
+
+<home>:
+	info : info
+	FloatLayout:
+		Label:
+			id : info
+			size_hint : 0.8, 0.2
+			pos_hint : {"x" : 0.15, "top" : 0.8}
+			text : "Te has loggeado correctamente!"
+		Button:
+			text : "Cerrar sesion"
+			size_hint : 0.4, 0.1
+			pos_hint : {"x" : 0.33, "top" : 0.55}
+			on_release:
+				app.root.current = 'login'
+				#Transición para que al cambiar de pantalla vaya para abajo
+				root.manager.transition.direction = "down"
+		
+
+
+#Pop up personalizado por si la endiñan con el usuario o la contraseña
+<P>:
+	Label:
+		text : "Has introducido mal el usuario o la \n contraseña"
+		size_hint : 0.1, 0.1
+		pos_hint : {"x" : 0.4, "top" : 0.8}
